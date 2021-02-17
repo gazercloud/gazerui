@@ -1,15 +1,15 @@
 package uiforms
 
 import (
-	"allece.com/system/core/canvas"
-	"allece.com/system/core/go-gl/glfw/v3.3/glfw"
-	"allece.com/system/core/grid/stats"
-	"allece.com/system/core/ui"
-	"allece.com/system/core/uicontrols"
-	"allece.com/system/core/uievents"
-	"allece.com/system/core/uiinterfaces"
-	"allece.com/system/core/uistyles"
 	"fmt"
+	"github.com/gazercloud/gazerui/canvas"
+	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
+	"github.com/gazercloud/gazerui/grid/stats"
+	"github.com/gazercloud/gazerui/ui"
+	"github.com/gazercloud/gazerui/uicontrols"
+	"github.com/gazercloud/gazerui/uievents"
+	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uistyles"
 	"golang.org/x/image/colornames"
 	"image"
 	"image/color"

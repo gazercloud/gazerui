@@ -1,8 +1,8 @@
 package uiresources
 
 import (
-	"allece.com/system/core/canvas"
 	"bytes"
+	"github.com/gazercloud/gazerui/canvas"
 	"golang.org/x/image/colornames"
 	"image"
 	"image/color"

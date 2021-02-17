@@ -1,10 +1,10 @@
 package uicontrols
 
 import (
-	"allece.com/system/core/ui"
-	"allece.com/system/core/uievents"
-	"allece.com/system/core/uiinterfaces"
-	"allece.com/system/core/uistyles"
+	"github.com/gazercloud/gazerui/ui"
+	"github.com/gazercloud/gazerui/uievents"
+	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uistyles"
 	"golang.org/x/image/colornames"
 	"image/color"
 	"math"

@@ -1,9 +1,9 @@
 package uiinterfaces
 
 import (
-	"allece.com/system/core/ui"
-	"allece.com/system/core/uievents"
-	"allece.com/system/core/uiproperties"
+	"github.com/gazercloud/gazerui/ui"
+	"github.com/gazercloud/gazerui/uievents"
+	"github.com/gazercloud/gazerui/uiproperties"
 	"image/color"
 )
 

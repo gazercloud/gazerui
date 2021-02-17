@@ -1,9 +1,9 @@
 package uicontrols
 
 import (
-	"allece.com/system/core/ui"
-	"allece.com/system/core/uiinterfaces"
 	"bytes"
+	"github.com/gazercloud/gazerui/ui"
+	"github.com/gazercloud/gazerui/uiinterfaces"
 	"github.com/nfnt/resize"
 	"image"
 )

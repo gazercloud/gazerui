@@ -1,9 +1,9 @@
 package uiinterfaces
 
 import (
-	"allece.com/system/core/go-gl/glfw/v3.3/glfw"
-	"allece.com/system/core/ui"
-	"allece.com/system/core/uievents"
+	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
+	"github.com/gazercloud/gazerui/ui"
+	"github.com/gazercloud/gazerui/uievents"
 )
 
 type Window interface {

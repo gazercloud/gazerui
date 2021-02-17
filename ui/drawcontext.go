@@ -1,8 +1,8 @@
 package ui
 
 import (
-	"allece.com/system/core/canvas"
 	"github.com/fogleman/gg"
+	"github.com/gazercloud/gazerui/canvas"
 	"image"
 	"image/color"
 )

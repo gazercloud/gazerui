@@ -1,8 +1,8 @@
 package uicontrols
 
 import (
-	"allece.com/system/core/canvas"
-	"allece.com/system/core/uiinterfaces"
+	"github.com/gazercloud/gazerui/canvas"
+	"github.com/gazercloud/gazerui/uiinterfaces"
 )
 
 type GroupBox struct {

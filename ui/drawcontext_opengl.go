@@ -1,11 +1,11 @@
 package ui
 
 import (
-	"allece.com/system/core/canvas"
-	"allece.com/system/core/go-gl/gl/v3.3-core/gl"
-	"allece.com/system/core/go-gl/glfw/v3.3/glfw"
 	"fmt"
 	"github.com/fogleman/gg"
+	"github.com/gazercloud/gazerui/canvas"
+	"github.com/gazercloud/gazerui/go-gl/gl/v3.3-core/gl"
+	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
 	"image"
 	"math"
 	"strings"

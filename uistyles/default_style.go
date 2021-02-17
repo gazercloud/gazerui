@@ -1,8 +1,8 @@
 package uistyles
 
 import (
-	"allece.com/system/core/uiinterfaces"
-	"allece.com/system/core/uiproperties"
+	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uiproperties"
 	"gopkg.in/go-playground/colors.v1"
 	"image/color"
 )

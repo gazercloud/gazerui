@@ -1,6 +1,6 @@
 package ui
 
-import "allece.com/system/core/opengl/gl11/gl"
+import "github.com/gazercloud/gazerui/opengl/gl11/gl"
 
 func initOpenGL11() {
 	err := gl.Init()

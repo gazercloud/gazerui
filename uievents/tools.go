@@ -1,7 +1,7 @@
 package uievents
 
 import (
-	"allece.com/system/core/go-gl/glfw/v3.3/glfw"
+	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
 	"image/color"
 )
 

@@ -1,7 +1,6 @@
 package uiproperties
 
 import (
-	"allece.com/system/core/ds"
 	"errors"
 	"fmt"
 	"golang.org/x/image/colornames"
@@ -194,43 +193,6 @@ func (c *Property) SetOwnValue(value interface{}) {
 	}
 }
 
-func (c *Property) SetOwnValueDS(value *ds.Ds) {
-	dsValue := value.MapItem("value")
-	if dsValue != nil {
-		if c.Type == PropertyTypeBool {
-			c.SetOwnValue(dsValue.Bool())
-		}
-		if c.Type == PropertyTypeInt {
-			c.SetOwnValue(dsValue.Long())
-		}
-		if c.Type == PropertyTypeInt32 {
-			c.SetOwnValue(dsValue.Int())
-		}
-		if c.Type == PropertyTypeColor {
-			var R, B, G, A uint32
-			if dsValue.HasMapItem("R") {
-				R = dsValue.MapItem("R").UInt()
-			}
-			if dsValue.HasMapItem("G") {
-				G = dsValue.MapItem("G").UInt()
-			}
-			if dsValue.HasMapItem("B") {
-				B = dsValue.MapItem("B").UInt()
-			}
-			if dsValue.HasMapItem("A") {
-				A = dsValue.MapItem("A").UInt()
-			}
-			c.SetOwnValue(color.RGBA{uint8(R), uint8(G), uint8(B), uint8(A)})
-		}
-		if c.Type == PropertyTypeDouble {
-			c.SetOwnValue(dsValue.Double())
-		}
-		if c.Type == PropertyTypeString {
-			c.SetOwnValue(dsValue.String())
-		}
-	}
-}
-
 func (c *Property) SetStyledValue(subclass string, value string, score int) {
 	var propValue *PropertyValue
 	var ok bool
@@ -390,43 +352,6 @@ func (c *Property) ValueOwn() interface{} {
 		return c.unstyledValue
 	}
 	return nil
-}
-
-func (c *Property) SaveToDs() *ds.Ds {
-	var result *ds.Ds
-	var resultValue *ds.Ds
-	if c.ValueOwn() != nil {
-		switch c.Type {
-		case PropertyTypeBool:
-			resultValue = ds.NewBoolVal(c.ValueOwn().(bool))
-		case PropertyTypeInt:
-			resultValue = ds.NewLongVal(int64(c.ValueOwn().(int)))
-		case PropertyTypeInt32:
-			resultValue = ds.NewIntVal(c.ValueOwn().(int32))
-		case PropertyTypeDouble:
-			resultValue = ds.NewDoubleVal(c.ValueOwn().(float64))
-		case PropertyTypeString:
-			resultValue = ds.NewStringVal(c.ValueOwn().(string))
-		case PropertyTypeColor:
-			r, g, b, a := c.ValueOwn().(color.Color).RGBA()
-			resultValue = ds.NewMap()
-			resultValue.AddMapItem("R", ds.NewUIntVal(r))
-			resultValue.AddMapItem("G", ds.NewUIntVal(g))
-			resultValue.AddMapItem("B", ds.NewUIntVal(b))
-			resultValue.AddMapItem("A", ds.NewUIntVal(a))
-		}
-	}
-	result = ds.NewMap()
-
-	if resultValue == nil {
-		resultValue = ds.NewEmpty()
-	}
-
-	result.AddMapItem("name", ds.NewStringVal(c.Name))
-	result.AddMapItem("type", ds.NewStringVal(string(c.Type)))
-	result.AddMapItem("value", resultValue)
-
-	return result
 }
 
 type PropertyStruct struct {

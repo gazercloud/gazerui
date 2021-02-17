@@ -1,7 +1,7 @@
 package uicontrols
 
 import (
-	"allece.com/system/core/uiinterfaces"
+	"github.com/gazercloud/gazerui/uiinterfaces"
 	"time"
 )
 

@@ -1,7 +1,7 @@
 package uiforms
 
 import (
-	"allece.com/system/core/uicontrols"
+	"github.com/gazercloud/gazerui/uicontrols"
 	"image/color"
 )
 

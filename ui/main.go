@@ -1,8 +1,8 @@
 package ui
 
 import (
-	"allece.com/system/core/go-gl/glfw/v3.3/glfw"
 	"fmt"
+	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
 	"runtime"
 )
 

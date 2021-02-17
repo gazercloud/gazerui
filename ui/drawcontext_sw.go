@@ -1,10 +1,10 @@
 package ui
 
 import (
-	"allece.com/system/core/canvas"
-	"allece.com/system/core/go-gl/glfw/v3.3/glfw"
-	"allece.com/system/core/opengl/gl11/gl"
 	"github.com/fogleman/gg"
+	"github.com/gazercloud/gazerui/canvas"
+	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
+	"github.com/gazercloud/gazerui/opengl/gl11/gl"
 	"image"
 	"image/draw"
 	"unsafe"

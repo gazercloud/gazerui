@@ -1,9 +1,9 @@
 package ui
 
 import (
-	"allece.com/system/core/canvas"
-	"allece.com/system/core/grid/stats"
 	"fmt"
+	"github.com/gazercloud/gazerui/canvas"
+	"github.com/gazercloud/gazerui/grid/stats"
 	"runtime"
 )
 

@@ -1,7 +1,7 @@
 package ui
 
 import (
-	"allece.com/system/core/go-gl/gl/v2.1/gl"
+	"github.com/gazercloud/gazerui/go-gl/gl/v2.1/gl"
 	"github.com/golang-collections/collections/stack"
 	"image/color"
 )

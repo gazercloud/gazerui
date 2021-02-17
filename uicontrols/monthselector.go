@@ -1,10 +1,10 @@
 package uicontrols
 
 import (
-	"allece.com/system/core/uievents"
-	"allece.com/system/core/uiinterfaces"
-	"allece.com/system/core/uistyles"
 	"fmt"
+	"github.com/gazercloud/gazerui/uievents"
+	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uistyles"
 	"image"
 )
 
