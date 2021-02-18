@@ -5,7 +5,6 @@ import (
 	"github.com/gazercloud/gazerui/uicontrols"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
-	"github.com/gazercloud/gazerui/uiresources"
 	"io/ioutil"
 	"path/filepath"
 	"sort"
@@ -117,7 +116,7 @@ func (c *OpenFileDialog) SetRoot(path string) {
 		rootItems := GetRootItems()
 		rootNode := c.tvItems.AddNode(nil, "Local Computer")
 		rootNode.UserData = "root"
-		rootNode.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_black_48dp.png", c.ForeColor())
+		//rootNode.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_black_48dp.png", c.ForeColor())
 
 		for _, rootItem := range rootItems {
 			node := c.tvItems.AddNode(rootNode, rootItem)
@@ -126,7 +125,7 @@ func (c *OpenFileDialog) SetRoot(path string) {
 			fi.Dir = true
 			fi.Path = rootItem
 			node.UserData = &fi
-			node.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_open_black_48dp.png", c.ForeColor())
+			//node.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_open_black_48dp.png", c.ForeColor())
 			c.tvItems.AddNode(node, "loading ...")
 		}
 		c.tvItems.ExpandNode(rootNode)
@@ -137,7 +136,7 @@ func (c *OpenFileDialog) SetRoot(path string) {
 		fi.Path = path
 		rootNode := c.tvItems.AddNode(nil, path)
 		rootNode.UserData = &fi
-		rootNode.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_black_48dp.png", c.ForeColor())
+		//rootNode.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_black_48dp.png", c.ForeColor())
 		c.tvItems.ExpandNode(rootNode)
 	}
 
@@ -165,12 +164,12 @@ func (c *OpenFileDialog) loadNode(loadingNode *uicontrols.TreeNode) {
 				c.tvItems.SetNodeValue(n, 2, f.SizeAsString())
 				ff := f
 				n.UserData = &ff
-				if f.Dir {
+				/*if f.Dir {
 					n.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/baseline_folder_open_black_48dp.png", c.ForeColor())
 					c.tvItems.AddNode(n, "loading ...")
 				} else {
 					n.Icon = uiresources.ResImageAdjusted("icons/material/file/drawable-hdpi/outline_text_snippet_black_48dp.png", c.ForeColor())
-				}
+				}*/
 			}
 		}
 	}

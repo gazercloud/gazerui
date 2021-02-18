@@ -9,17 +9,13 @@ import (
 	"image/png"
 )
 
-func ResImage(resName string) image.Image {
-	/*iconBin, _ := Asset(resName)
-	img, err := png.Decode(bytes.NewBuffer(iconBin))
+func ResImage(resData []byte) image.Image {
+	img, err := png.Decode(bytes.NewBuffer(resData))
 	if err == nil {
 		return img
 	}
-
 	img = blankImage
-
-	return img*/
-	return nil
+	return img
 }
 
 func ImageFromBin(data []byte) image.Image {
@@ -51,18 +47,15 @@ func ResBin(resName string) []byte {
 	return nil
 }
 
-func ResImageAdjusted(resName string, col color.Color) image.Image {
-	/*iconBin, _ := Asset(resName)
-	img, err := png.Decode(bytes.NewBuffer(iconBin))
+func ResImgCol(data []byte, col color.Color) image.Image {
+	img, err := png.Decode(bytes.NewBuffer(data))
 	if err == nil {
 		img = canvas.AdjustImageForColor(img, img.Bounds().Max.X, img.Bounds().Max.Y, col)
 	} else {
 		img = blankImage
 
 	}
-	//return nil
-	return img*/
-	return nil
+	return img
 }
 
 var blankImage *image.RGBA

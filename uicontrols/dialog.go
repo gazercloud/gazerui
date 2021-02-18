@@ -5,7 +5,7 @@ import (
 	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
-	"github.com/gazercloud/gazerui/uiresources"
+
 	"github.com/gazercloud/gazerui/uistyles"
 	"golang.org/x/image/colornames"
 	"log"
@@ -59,7 +59,7 @@ func NewDialogHeader(parent uiinterfaces.Widget) *dialogHeader {
 		c.dialog.Reject()
 	})
 	c.btnClose.SetBorders(0, colornames.Red) // icons\material\navigation\drawable-hdpi\ic_close_black_48dp.png
-	c.btnClose.SetImage(uiresources.ResImageAdjusted("icons/material/navigation/drawable-hdpi/ic_close_black_48dp.png", c.ForeColor()))
+	//c.btnClose.SetImage(uiresources.ResImageAdjusted("icons/material/navigation/drawable-hdpi/ic_close_black_48dp.png", c.ForeColor()))
 	c.btnClose.imageForeColor = true
 	c.btnClose.showText = false
 	c.btnClose.rebuildContent()

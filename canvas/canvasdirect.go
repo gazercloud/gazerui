@@ -573,6 +573,9 @@ func (c *CanvasDirect) DrawImage(x int, y int, img image.Image) {
 }
 
 func AdjustImageForColor(mask image.Image, width int, height int, col color.Color) image.Image {
+	if mask == nil {
+		return nil
+	}
 	img := resize.Resize(uint(height), uint(height), mask, resize.Bicubic)
 
 	// Src

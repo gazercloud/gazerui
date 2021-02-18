@@ -42,13 +42,13 @@ func NewSpinBox(parent uiinterfaces.Widget) *SpinBox {
 	c.AddWidgetOnGrid(p, 1, 0)
 
 	c.btnUp = p.AddButtonOnGrid(0, 0, "", c.upClick)
-	c.btnUp.SetImage(uiresources.ResImage("icons/material/navigation/drawable-hdpi/ic_expand_less_black_48dp.png"))
+	c.btnUp.SetImage(uiresources.ResImage(uiresources.R_icons_material4_png_navigation_expand_less_materialicons_48dp_1x_baseline_expand_less_black_48dp_png))
 	c.btnUp.SetName("btnUp")
 	c.btnUp.SetImageSize(16, 8)
 	c.btnUp.SetPadding(0)
 
 	c.btnDown = p.AddButtonOnGrid(0, 1, "", c.downClick)
-	c.btnDown.SetImage(uiresources.ResImage("icons/material/navigation/drawable-hdpi/ic_expand_more_black_48dp.png"))
+	c.btnDown.SetImage(uiresources.ResImage(uiresources.R_icons_material4_png_navigation_expand_more_materialicons_48dp_1x_baseline_expand_more_black_48dp_png))
 	c.btnDown.SetName("btnDown")
 	c.btnDown.SetImageSize(16, 8)
 	c.btnDown.SetPadding(0)

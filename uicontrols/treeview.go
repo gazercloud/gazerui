@@ -114,8 +114,8 @@ func NewTreeView(parent uiinterfaces.Widget) *TreeView {
 	c.content.SetYExpandable(true)
 	c.AddWidgetOnGrid(c.content, 0, 1)
 
-	c.imgPlus = canvas.AdjustImageForColor(uiresources.ResImage("icons/material/content/drawable-hdpi/ic_add_black_48dp.png"), c.itemHeight, c.itemHeight, c.ForeColor())
-	c.imgMinus = canvas.AdjustImageForColor(uiresources.ResImage("icons/material/content/drawable-hdpi/ic_remove_black_48dp.png"), c.itemHeight, c.itemHeight, c.ForeColor())
+	c.imgPlus = canvas.AdjustImageForColor(uiresources.ResImage(uiresources.R_icons_material4_png_content_add_materialicons_48dp_1x_baseline_add_black_48dp_png), c.itemHeight, c.itemHeight, c.ForeColor())
+	c.imgMinus = canvas.AdjustImageForColor(uiresources.ResImage(uiresources.R_icons_material4_png_content_remove_materialicons_48dp_1x_baseline_remove_black_48dp_png), c.itemHeight, c.itemHeight, c.ForeColor())
 
 	c.AddColumn("Items", 200)
 

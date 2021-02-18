@@ -92,7 +92,7 @@ func (c *PopupMenu) AddItem(text string, onClick func(event *uievents.Event), im
 	return pItem
 }
 
-func (c *PopupMenu) AddItemWithUiResImage(text string, onClick func(event *uievents.Event), img string, keyCombination string) *PopupMenuItem {
+func (c *PopupMenu) AddItemWithUiResImage(text string, onClick func(event *uievents.Event), img []byte, keyCombination string) *PopupMenuItem {
 	var item PopupMenuItem
 	item.InitControl(c, &item)
 	item.SetAnchors(ANCHOR_LEFT)

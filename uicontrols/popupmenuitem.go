@@ -6,6 +6,7 @@ import (
 	"github.com/gazercloud/gazerui/ui"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiresources"
+
 	"github.com/nfnt/resize"
 	"image"
 	"time"
@@ -16,7 +17,7 @@ type PopupMenuItem struct {
 	text                 string
 	OnClick              func(event *uievents.Event)
 	Image                image.Image
-	ImageResource        string
+	ImageResource        []byte
 	KeyCombination       string
 	parentMenu           *PopupMenu
 	needToClosePopupMenu func()
@@ -64,10 +65,10 @@ func (c *PopupMenuItem) Draw(ctx ui.DrawContext) {
 	ctx.FillRect(0, 0, c.InnerWidth(), c.InnerHeight())
 
 	xOffset := 0
-	if c.Image != nil || c.ImageResource != "" {
+	if c.Image != nil || c.ImageResource != nil {
 		imageSource := c.Image
-		if c.ImageResource != "" {
-			imageSource = uiresources.ResImageAdjusted(c.ImageResource, c.ForeColor())
+		if c.ImageResource != nil {
+			imageSource = uiresources.ResImgCol(c.ImageResource, c.ForeColor())
 		}
 
 		img := resize.Resize(24, 24, imageSource, resize.Bicubic)
@@ -90,7 +91,7 @@ func (c *PopupMenuItem) Draw(ctx ui.DrawContext) {
 	}
 	ctx.DrawText(xOffset+5, 0, textWidth, c.InnerHeight(), c.text)
 	if c.innerMenu != nil {
-		imgArrow := uiresources.ResImageAdjusted("icons/material/av/drawable-hdpi/ic_play_arrow_black_48dp.png", c.ForeColor())
+		imgArrow := uiresources.ResImgCol(uiresources.R_icons_material4_png_av_play_arrow_materialicons_48dp_1x_baseline_play_arrow_black_48dp_png, c.ForeColor())
 		ctx.DrawImage(c.InnerWidth()-c.InnerHeight(), 0, imgArrow.Bounds().Max.X, imgArrow.Bounds().Max.Y, resize.Resize(uint(c.InnerHeight()), uint(c.InnerHeight()), imgArrow, resize.Bicubic))
 	}
 }

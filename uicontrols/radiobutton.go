@@ -4,7 +4,6 @@ import (
 	"github.com/gazercloud/gazerui/canvas"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
-	"github.com/gazercloud/gazerui/uiresources"
 )
 
 type RadioButton struct {
@@ -45,10 +44,10 @@ func (c *RadioButton) ControlType() string {
 
 func (c *RadioButton) updateImage() {
 	if c.checked {
-		c.imgBox.SetImage(uiresources.ResImageAdjusted("icons/material/toggle/drawable-hdpi/ic_radio_button_checked_black_24dp.png", c.ForeColor()))
+		//c.imgBox.SetImage(uiresources.ResImageAdjusted("icons/material/toggle/drawable-hdpi/ic_radio_button_checked_black_24dp.png", c.ForeColor()))
 		c.imgBox.SetScaling(ImageBoxScaleAdjustImageKeepAspectRatio)
 	} else {
-		c.imgBox.SetImage(uiresources.ResImageAdjusted("icons/material/toggle/drawable-hdpi/ic_radio_button_unchecked_black_24dp.png", c.ForeColor()))
+		//c.imgBox.SetImage(uiresources.ResImageAdjusted("icons/material/toggle/drawable-hdpi/ic_radio_button_unchecked_black_24dp.png", c.ForeColor()))
 		c.imgBox.SetScaling(ImageBoxScaleAdjustImageKeepAspectRatio)
 	}
 }
