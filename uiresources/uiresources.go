@@ -10,7 +10,7 @@ import (
 )
 
 func ResImage(resName string) image.Image {
-	iconBin, _ := Asset(resName)
+	/*iconBin, _ := Asset(resName)
 	img, err := png.Decode(bytes.NewBuffer(iconBin))
 	if err == nil {
 		return img
@@ -18,7 +18,8 @@ func ResImage(resName string) image.Image {
 
 	img = blankImage
 
-	return img
+	return img*/
+	return nil
 }
 
 func ImageFromBin(data []byte) image.Image {
@@ -45,12 +46,13 @@ func ImageFromBinAdjusted(data []byte, col color.Color) image.Image {
 }
 
 func ResBin(resName string) []byte {
-	iconBin, _ := Asset(resName)
-	return iconBin
+	/*iconBin, _ := Asset(resName)
+	return iconBin*/
+	return nil
 }
 
 func ResImageAdjusted(resName string, col color.Color) image.Image {
-	iconBin, _ := Asset(resName)
+	/*iconBin, _ := Asset(resName)
 	img, err := png.Decode(bytes.NewBuffer(iconBin))
 	if err == nil {
 		img = canvas.AdjustImageForColor(img, img.Bounds().Max.X, img.Bounds().Max.Y, col)
@@ -59,7 +61,8 @@ func ResImageAdjusted(resName string, col color.Color) image.Image {
 
 	}
 	//return nil
-	return img
+	return img*/
+	return nil
 }
 
 var blankImage *image.RGBA
