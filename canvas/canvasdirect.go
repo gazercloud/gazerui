@@ -576,7 +576,7 @@ func AdjustImageForColor(mask image.Image, width int, height int, col color.Colo
 	if mask == nil {
 		return nil
 	}
-	img := resize.Resize(uint(height), uint(height), mask, resize.Bicubic)
+	img := resize.Resize(uint(width), uint(height), mask, resize.Bicubic)
 
 	// Src
 	src := image.NewRGBA(image.Rectangle{image.Point{0, 0}, image.Point{width, height}})

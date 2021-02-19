@@ -6,6 +6,7 @@ import (
 	"github.com/gazercloud/gazerui/ui"
 	"image/color"
 	"math"
+	"strings"
 )
 
 type VerticalScale struct {
@@ -33,20 +34,77 @@ func (c *VerticalScale) SetDisplayRange(displayMin, displayMax float64) {
 	c.displayMax = displayMax
 }
 
+func (c *VerticalScale) signsAfterPoint(str string) int {
+	pointPosition := strings.Index(str, ".")
+	if pointPosition < 0 {
+		pointPosition = len(str)
+	}
+	return len(str) - pointPosition
+}
+
+func (c *VerticalScale) prepareValuesText(values []ScaleValue) []ScaleValue {
+	result := make([]ScaleValue, 0)
+	mapsCountByStringLen := make(map[int]int)
+	for i, v := range values {
+		txt := fmt.Sprintf("%.4f", v.Value)
+		signsAfterPoint := c.signsAfterPoint(txt)
+		if _, ok := mapsCountByStringLen[signsAfterPoint]; ok {
+			mapsCountByStringLen[signsAfterPoint]++
+		} else {
+			mapsCountByStringLen[signsAfterPoint] = 1
+		}
+		values[i].ValueText = txt
+	}
+
+	countOfTarget := 0
+	maxTxtLenForDisplay := 10
+	for i := 0; i < 10; i++ {
+		if _, ok := mapsCountByStringLen[i]; ok {
+			countOfTarget += mapsCountByStringLen[i]
+		}
+		if countOfTarget > len(values)/3 {
+			maxTxtLenForDisplay = i
+			break
+		}
+	}
+
+	for _, v := range values {
+		if c.signsAfterPoint(v.ValueText) <= maxTxtLenForDisplay {
+			var scaleValue ScaleValue
+			scaleValue.Value = v.Value
+			scaleValue.ValueText = v.ValueText
+			result = append(result, scaleValue)
+		}
+	}
+	return result
+}
+
+func (c *VerticalScale) prepareValuesTextSimple(values []ScaleValue) []ScaleValue {
+	result := make([]ScaleValue, 0)
+	for _, v := range values {
+		var scaleValue ScaleValue
+		scaleValue.Value = v.Value
+		scaleValue.ValueText = fmt.Sprintf("%.6g", v.Value)
+		result = append(result, scaleValue)
+	}
+	return result
+}
+
 func (c *VerticalScale) Draw(ctx ui.DrawContext, xOffset int, yOffset int, col color.Color) {
 	fontSize := float64(12)
 	count := float64(c.Height) / (fontSize + fontSize/2)
 
 	beautifulScale := c.getBeautifulScale(c.displayMin, c.displayMax, int(count))
-	for _, v := range beautifulScale {
+	beautifulScaleOptimazed := c.prepareValuesTextSimple(beautifulScale)
+	for _, v := range beautifulScaleOptimazed {
 		_, hText, _ := canvas.MeasureText("Roboto", fontSize, false, false, fmt.Sprint(v), false)
 		ctx.SetColor(col)
 		ctx.SetFontSize(12)
 		ctx.SetStrokeWidth(1)
 		ctx.SetTextAlign(canvas.HAlignRight, canvas.VAlignCenter)
-		strVal := fmt.Sprintf("%.4g", v)
-		ctx.DrawText(xOffset+3, yOffset+c.getPointOnY(v)-hText/2, c.Width-10, hText, strVal)
-		ctx.DrawLine(xOffset+c.Width-3, yOffset+c.getPointOnY(v), xOffset+c.Width, yOffset+c.getPointOnY(v))
+		//strVal := fmt.Sprintf("%.4g", v)
+		ctx.DrawText(xOffset+3, yOffset+c.getPointOnY(v.Value)-hText/2, c.Width-10, hText, v.ValueText)
+		ctx.DrawLine(xOffset+c.Width-3, yOffset+c.getPointOnY(v.Value), xOffset+c.Width, yOffset+c.getPointOnY(v.Value))
 	}
 
 	ctx.SetStrokeWidth(1)
@@ -86,14 +144,21 @@ func (c *VerticalScale) getValueByY(y int) float64 {
 	return float64(c.Height-y)/onePixelValue + c.displayMin
 }
 
-func (c *VerticalScale) getBeautifulScale(min float64, max float64, countOfPoints int) []float64 {
-	var scale []float64
+type ScaleValue struct {
+	Value     float64
+	ValueText string
+}
+
+func (c *VerticalScale) getBeautifulScale(min float64, max float64, countOfPoints int) []ScaleValue {
+	var scale []ScaleValue
+	scale = make([]ScaleValue, 0)
+
 	if max < min {
 		return scale
 	}
 
 	if max == min {
-		scale = append(scale, min)
+		scale = append(scale, ScaleValue{Value: min})
 		return scale
 	}
 
@@ -118,7 +183,7 @@ func (c *VerticalScale) getBeautifulScale(min float64, max float64, countOfPoint
 	// Генерируем точки
 	for i := 0; i < countOfPoints; i++ {
 		if newMin < max && newMin > min {
-			scale = append(scale, newMin)
+			scale = append(scale, ScaleValue{Value: newMin})
 		}
 		newMin += step10
 	}
