@@ -6,6 +6,7 @@ import (
 	"github.com/gazercloud/gazerui/ui"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uiresources"
 	"golang.org/x/image/colornames"
 	"image"
 )
@@ -54,7 +55,7 @@ func NewComboBox(parent uiinterfaces.Widget) *ComboBox {
 
 func (c *ComboBox) UpdateStyle() {
 	c.Container.UpdateStyle()
-	//c.img = uiresources.ResImageAdjusted("icons/material/navigation/drawable-hdpi/ic_arrow_drop_down_black_48dp.png", c.ForeColor())
+	c.img = uiresources.ResImgCol(uiresources.R_icons_material4_png_navigation_arrow_drop_down_materialicons_48dp_1x_baseline_arrow_drop_down_black_48dp_png, c.ForeColor())
 }
 
 func (c *ComboBox) ControlType() string {

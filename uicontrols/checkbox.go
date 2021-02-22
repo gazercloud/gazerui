@@ -4,6 +4,7 @@ import (
 	"github.com/gazercloud/gazerui/canvas"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uiresources"
 )
 
 type CheckBox struct {
@@ -69,10 +70,10 @@ func (c *CheckBox) EnabledChanged(enabled bool) {
 
 func (c *CheckBox) updateImage() {
 	if c.checked {
-		//c.imgBox.SetImage(uiresources.ResImageAdjusted("icons/material/toggle/drawable-hdpi/ic_check_box_black_24dp.png", c.ForeColor()))
+		c.imgBox.SetImage(uiresources.ResImgCol(uiresources.R_icons_material4_png_toggle_check_box_materialiconsoutlined_48dp_1x_outline_check_box_black_48dp_png, c.ForeColor())) /////////////////////////////////
 		c.imgBox.SetScaling(ImageBoxScaleAdjustImageKeepAspectRatio)
 	} else {
-		//c.imgBox.SetImage(uiresources.ResImageAdjusted("icons/material/toggle/drawable-hdpi/ic_check_box_outline_blank_black_24dp.png", c.ForeColor()))
+		c.imgBox.SetImage(uiresources.ResImgCol(uiresources.R_icons_material4_png_toggle_check_box_outline_blank_materialiconsoutlined_48dp_1x_outline_check_box_outline_blank_black_48dp_png, c.ForeColor()))
 		c.imgBox.SetScaling(ImageBoxScaleAdjustImageKeepAspectRatio)
 	}
 }
