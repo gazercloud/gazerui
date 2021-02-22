@@ -3,6 +3,7 @@ package uicontrols
 import (
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
+	"github.com/gazercloud/gazerui/uiresources"
 	"image"
 	"image/color"
 )
@@ -44,6 +45,7 @@ func NewTabControl(parent uiinterfaces.Widget) *TabControl {
 	var c TabControl
 	c.InitControl(parent, &c)
 	c.pages = make([]*TabPage, 0)
+	c.SetPanelPadding(0)
 	c.SetCellPadding(0)
 
 	c.header = NewPanel(&c)
@@ -185,35 +187,42 @@ func (c *TabControl) updateHeaderButtons() {
 		btn.SetText(page.text)
 		btn.SetBorderRight(0, color.RGBA{})
 
-		btnClose := btnPanel.AddButtonOnGrid(1, 0, "X", func(event *uievents.Event) {
+		btnClose := btnPanel.AddButtonOnGrid(1, 0, "", func(event *uievents.Event) {
 			if c.OnNeedClose != nil {
 				c.OnNeedClose(event.Sender.(*Button).UserData("index").(int))
 			}
 		})
 		btnClose.SetUserData("index", pageIndex)
 		btnClose.SetBorderLeft(0, color.RGBA{})
+		btnClose.SetImage(uiresources.ResImgCol(uiresources.R_icons_material4_png_navigation_close_materialiconsoutlined_48dp_1x_outline_close_black_48dp_png, c.ForeColor()))
+		btnClose.SetImageSize(16, 16)
 
 		if pageIndex == c.currentPageIndex {
-			btn.SetForeColor(c.BackColor())
+			/*btn.SetForeColor(c.BackColor())
 			btn.SetBackColor(c.ForeColor())
 			btnClose.SetForeColor(c.BackColor())
-			btnClose.SetBackColor(c.ForeColor())
+			btnClose.SetBackColor(c.ForeColor())*/
+			btn.parent.SetBorderBottom(5, c.AccentColor())
 		} else {
-			btn.SetForeColor(nil)
+			/*btn.SetForeColor(nil)
 			btn.SetBackColor(nil)
 			btnClose.SetForeColor(nil)
-			btnClose.SetBackColor(nil)
+			btnClose.SetBackColor(nil)*/
+			btn.parent.SetBorderBottom(5, c.BackColor())
 		}
 	}
 
 	pageIndex := len(c.pages)
 
 	if c.showAddButton {
-		c.btnAdd = c.header.AddButtonOnGrid(pageIndex+1, 0, " + ", func(event *uievents.Event) {
+		c.btnAdd = c.header.AddButtonOnGrid(pageIndex+1, 0, "", func(event *uievents.Event) {
 			if c.OnAddButtonPressed != nil {
 				c.OnAddButtonPressed()
 			}
 		})
+		c.btnAdd.SetBorderBottom(5, c.BackColor())
+		c.btnAdd.SetImage(uiresources.ResImgCol(uiresources.R_icons_material4_png_content_add_materialicons_48dp_1x_baseline_add_black_48dp_png, c.ForeColor()))
+		c.btnAdd.SetImageSize(32, 16)
 		c.headerHSpacer = c.header.AddHSpacerOnGrid(pageIndex+2, 0)
 	} else {
 		c.headerHSpacer = c.header.AddHSpacerOnGrid(pageIndex+1, 0)

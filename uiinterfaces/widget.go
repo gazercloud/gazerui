@@ -98,6 +98,12 @@ type Widget interface {
 	StyledValue(subclass string, propertyName string) interface{}
 	ApplyStyleLine(controlName string, controlType string, styleClass string, stylePseudoClass string, propertyName string, value string)
 
+	SetBorderLeft(width int, col color.Color)
+	SetBorderRight(width int, col color.Color)
+	SetBorderTop(width int, col color.Color)
+	SetBorderBottom(width int, col color.Color)
+	SetBorders(width int, col color.Color)
+
 	OnInit()
 
 	ClearRadioButtons()
