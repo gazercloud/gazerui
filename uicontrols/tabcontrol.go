@@ -4,6 +4,7 @@ import (
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
 	"image"
+	"image/color"
 )
 
 type TabControl struct {
@@ -182,6 +183,7 @@ func (c *TabControl) updateHeaderButtons() {
 		c.headerButtons = append(c.headerButtons, btn)
 		page.headerButton = btn
 		btn.SetText(page.text)
+		btn.SetBorderRight(0, color.RGBA{})
 
 		btnClose := btnPanel.AddButtonOnGrid(1, 0, "X", func(event *uievents.Event) {
 			if c.OnNeedClose != nil {
@@ -189,6 +191,7 @@ func (c *TabControl) updateHeaderButtons() {
 			}
 		})
 		btnClose.SetUserData("index", pageIndex)
+		btnClose.SetBorderLeft(0, color.RGBA{})
 
 		if pageIndex == c.currentPageIndex {
 			btn.SetForeColor(c.BackColor())
