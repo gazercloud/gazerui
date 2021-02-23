@@ -395,6 +395,29 @@ func (c *Form) SetTheme(theme string) {
 	c.userPanel.SetTheme(theme)
 }
 
+func (c *Form) updatePanelInnerSize() {
+	if c.userPanel == nil {
+		return
+	}
+
+	width, height := c.Window().GetSize()
+
+	minWidth := c.userPanel.MinWidth()
+	minHeight := c.userPanel.MinHeight()
+	if minWidth > width || minHeight > height {
+		if minWidth < width {
+			minWidth = width
+		}
+		if minHeight < height {
+			minHeight = height
+		}
+		c.userPanel.SetInnerSizeDirect(minWidth, minHeight)
+	} else {
+		c.userPanel.ResetInnerSizeDirect()
+		c.userPanel.ScrollEnsureVisible(0, 0)
+	}
+}
+
 func (c *Form) ProcessWindowResize(width, height int) {
 
 	//ui.ClearFont()
@@ -407,20 +430,7 @@ func (c *Form) ProcessWindowResize(width, height int) {
 		c.userPanel.SetMaxHeight(height)
 		c.userPanel.SetVerticalScrollVisible(true)
 		c.userPanel.SetHorizontalScrollVisible(true)
-
-		minWidth := c.userPanel.MinWidth()
-		minHeight := c.userPanel.MinHeight()
-		if minWidth > width || minHeight > height {
-			if minWidth < width {
-				minWidth = width
-			}
-			if minHeight < height {
-				minHeight = height
-			}
-			c.userPanel.SetInnerSizeDirect(minWidth, minHeight)
-		} else {
-			c.userPanel.ResetInnerSizeDirect()
-		}
+		c.updatePanelInnerSize()
 	}
 	c.width = width
 	c.height = height
@@ -1222,6 +1232,8 @@ func (c *Form) realUpdateLayout() {
 		y := c.lastMouseMovePos.Y
 		c.updateHoverWidget(x, y)
 	}
+
+	c.updatePanelInnerSize()
 }
 
 func (c *Form) timerMemoryDump() {
