@@ -1195,7 +1195,7 @@ func (c *Form) realUpdateLayout() {
 				minH = maxH - 1
 			}
 
-			c.Window().SetSizeLimits(minW, minH, maxW, maxH)
+			//c.Window().SetSizeLimits(minW, minH, maxW, maxH)
 		}
 		c.needUpdateLayout = false
 
