@@ -75,7 +75,6 @@ type Form struct {
 	keyModifiers uievents.KeyModifiers
 
 	drawTime     []float64
-	drawTimes    int
 	dialogResult bool
 
 	formTimers []*uievents.FormTimer
@@ -105,6 +104,10 @@ type Form struct {
 	childModal uiinterfaces.Window
 
 	needUpdateLayout bool
+
+	drawTimes      []time.Duration
+	drawTimesIndex int
+	drawTimesCount int
 }
 
 func init() {
@@ -113,6 +116,8 @@ func init() {
 
 func (c *Form) Init() {
 	c.ProcessWindowResize(1200, 600)
+	c.drawTimesCount = 5
+	c.drawTimes = make([]time.Duration, c.drawTimesCount)
 
 	c.userPanel = uicontrols.NewRootPanel(c)
 	c.userPanel.SetBackColor(uistyles.DefaultBackColor)
@@ -240,7 +245,14 @@ func (c *Form) Draw() bool {
 
 	//fmt.Println("Form Draw")
 
-	drawPeriodTime := 100 * time.Millisecond
+	avgDrawTimeMs := int64(0)
+	for i := 0; i < c.drawTimesCount; i++ {
+		avgDrawTimeMs += c.drawTimes[i].Milliseconds()
+	}
+	avgDrawTimeMs = avgDrawTimeMs / int64(c.drawTimesCount)
+	drawPeriodTime := time.Duration(avgDrawTimeMs*2+1) * time.Millisecond
+	fmt.Println("Form draw avg:", avgDrawTimeMs, "drawPeriod:", drawPeriodTime)
+
 	if ui.UseOpenGL33 {
 		drawPeriodTime = 100 * time.Millisecond
 	}
@@ -251,7 +263,7 @@ func (c *Form) Draw() bool {
 
 	c.lastDrawTime = time.Now()
 
-	//t1 := time.Now()
+	t1 := time.Now()
 
 	key := fmt.Sprint("W:", c.Width(), " H:", c.Height())
 	if c.currentCanvasKey != key {
@@ -288,9 +300,14 @@ func (c *Form) Draw() bool {
 	ctx.Finish()
 
 	c.window.SwapBuffers()
-	//t2 := time.Now()
+	t2 := time.Now()
 
-	//dt := t2.Sub(t1)
+	drawTime := t2.Sub(t1)
+	c.drawTimes[c.drawTimesIndex] = drawTime
+	c.drawTimesIndex++
+	if c.drawTimesIndex >= c.drawTimesCount {
+		c.drawTimesIndex = 0
+	}
 	//log.Println("Forms draw time: ", dt.Nanoseconds()/1000000, " src: ", c.lastUpdateSource)
 
 	c.needToUpdate = false
