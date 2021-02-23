@@ -230,6 +230,7 @@ func (c *Form) Window() *glfw.Window {
 }
 
 func (c *Form) Draw() bool {
+	c.realUpdateLayout()
 
 	if c.window == nil {
 		return false
@@ -262,7 +263,6 @@ func (c *Form) Draw() bool {
 	c.lastDrawTime = time.Now()
 
 	t1 := time.Now()
-	c.realUpdateLayout()
 
 	key := fmt.Sprint("W:", c.Width(), " H:", c.Height())
 	if c.currentCanvasKey != key {
