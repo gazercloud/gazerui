@@ -240,9 +240,9 @@ func (c *Form) Draw() bool {
 
 	//fmt.Println("Form Draw")
 
-	drawPeriodTime := 50 * time.Millisecond
+	drawPeriodTime := 100 * time.Millisecond
 	if ui.UseOpenGL33 {
-		drawPeriodTime = 50 * time.Millisecond
+		drawPeriodTime = 100 * time.Millisecond
 	}
 
 	if time.Since(c.lastDrawTime) < drawPeriodTime {
