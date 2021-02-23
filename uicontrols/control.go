@@ -1514,6 +1514,12 @@ func (c *Control) SetInnerSizeDirect(w int, h int) {
 	c.horizontalScrollVisible.SetOwnValue(true)
 }
 
+func (c *Control) ResetInnerSizeDirect() {
+	c.innerSizeOverloaded = false
+	c.verticalScrollVisible.SetOwnValue(false)
+	c.horizontalScrollVisible.SetOwnValue(false)
+}
+
 func (c *Control) SetPos(x, y int) {
 	c.SetX(x)
 	c.SetY(y)

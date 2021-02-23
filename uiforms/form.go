@@ -402,6 +402,25 @@ func (c *Form) ProcessWindowResize(width, height int) {
 	if c.userPanel != nil {
 		c.userPanel.SetWidth(width)
 		c.userPanel.SetHeight(height)
+		c.userPanel.SetMaxWidth(width)
+		c.userPanel.SetMaxHeight(height)
+		c.userPanel.SetMaxHeight(height)
+		c.userPanel.SetVerticalScrollVisible(true)
+		c.userPanel.SetHorizontalScrollVisible(true)
+
+		minWidth := c.userPanel.MinWidth()
+		minHeight := c.userPanel.MinHeight()
+		if minWidth > width || minHeight > height {
+			if minWidth < width {
+				minWidth = width
+			}
+			if minHeight < height {
+				minHeight = height
+			}
+			c.userPanel.SetInnerSizeDirect(minWidth, minHeight)
+		} else {
+			c.userPanel.ResetInnerSizeDirect()
+		}
 	}
 	c.width = width
 	c.height = height
