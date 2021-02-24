@@ -3,8 +3,8 @@ package ui
 import (
 	"github.com/fogleman/gg"
 	"github.com/gazercloud/gazerui/canvas"
-	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
 	"github.com/gazercloud/gazerui/opengl/gl11/gl"
+	"github.com/go-gl/glfw/v3.3/glfw"
 	"image"
 	"image/draw"
 	"unsafe"

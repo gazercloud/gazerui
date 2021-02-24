@@ -2,10 +2,10 @@ package uicontrols
 
 import (
 	"github.com/gazercloud/gazerui/canvas"
-	"github.com/gazercloud/gazerui/go-gl/glfw/v3.3/glfw"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
 	"github.com/gazercloud/gazerui/uiresources"
+	"github.com/go-gl/glfw/v3.3/glfw"
 
 	"github.com/gazercloud/gazerui/uistyles"
 	"golang.org/x/image/colornames"

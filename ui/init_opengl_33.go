@@ -1,6 +1,6 @@
 package ui
 
-import "github.com/gazercloud/gazerui/go-gl/gl/v3.3-core/gl"
+import "github.com/go-gl/gl/v3.3-core/gl"
 
 func InitOpenGL33() {
 	err := gl.Init()
