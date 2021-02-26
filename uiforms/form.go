@@ -846,7 +846,7 @@ func (c *Form) updateHoverWidget(x, y int) {
 		fX, fY := widgetUpderPoint.RectClientAreaOnWindow()
 		ev := uievents.NewMouseValidateDropEvent(x-fX, y-fY, 0, c.keyModifiers, c.draggingObject)
 		widgetUpderPoint.MouseValidateDrop(ev)
-		c.draggingObject = nil
+		//c.draggingObject = nil
 	}
 
 	if wHover != nil {
@@ -931,6 +931,8 @@ func (c *Form) ProcessMouseUp(button uievents.MouseButton) {
 		c.ProcessClick(x, y, button)
 	}
 
+	fmt.Println("ProcessMouseUp drop: ", c.draggingObject != nil, c.lastMouseDownWidget != nil)
+
 	if c.draggingObject != nil && c.lastMouseDownWidget != nil {
 
 		widgetUnderPoint := c.userPanel.ProcessFindWidgetUnderPointer(x, y)
@@ -939,8 +941,9 @@ func (c *Form) ProcessMouseUp(button uievents.MouseButton) {
 
 		ev := uievents.NewMouseDropEvent(x-fX, y-fY, button, c.keyModifiers, c.draggingObject)
 		widgetUnderPoint.MouseDrop(ev)
-		c.draggingObject = nil
 	}
+
+	c.draggingObject = nil
 
 	if c.lastMouseDownWidget != nil {
 		// Event to mouseDowned Widget

@@ -845,7 +845,7 @@ func (c *Control) ProcessMouseClick(event *uievents.MouseClickEvent) {
 				contextMenuFound = true
 			} else {
 				if c.OnContextMenuNeed != nil {
-					m := c.OnContextMenuNeed(wX+me.X, wY+me.Y)
+					m := c.OnContextMenuNeed(me.X, me.Y)
 					if m != nil {
 						m.ShowMenu(wX+me.X-c.ScrollOffsetX(), wY+me.Y-c.ScrollOffsetY())
 						contextMenuFound = true
