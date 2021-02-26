@@ -935,7 +935,7 @@ func (c *Form) ProcessMouseUp(button uievents.MouseButton) {
 
 		widgetUnderPoint := c.userPanel.ProcessFindWidgetUnderPointer(x, y)
 		fmt.Println("ProcessMouseUp widgetUnderPoint: ", widgetUnderPoint.FullPath())
-		fX, fY := c.lastMouseDownWidget.RectClientAreaOnWindow()
+		fX, fY := widgetUnderPoint.RectClientAreaOnWindow()
 
 		ev := uievents.NewMouseDropEvent(x-fX, y-fY, button, c.keyModifiers, c.draggingObject)
 		widgetUnderPoint.MouseDrop(ev)
