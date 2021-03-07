@@ -320,7 +320,6 @@ func (c *Form) Draw() bool {
 	if c.drawTimesIndex >= c.drawTimesCount {
 		c.drawTimesIndex = 0
 	}
-	//log.Println("Forms draw time: ", dt.Nanoseconds()/1000000, " src: ", c.lastUpdateSource)
 
 	c.needToUpdate = false
 	return true
@@ -1154,11 +1153,7 @@ func (c *Form) MainTimer() {
 		if timer.Enabled {
 			if nowMSec-timer.LastElapsedDTMSec > timer.Period {
 				if timer.Handler != nil {
-					//start := time.Now()
-
 					timer.Handler()
-					//elapsed := time.Since(start)
-					//log.Printf("[Form][mainTimer] %f", float64(elapsed)/1000000)
 				}
 				timer.LastElapsedDTMSec = nowMSec
 			}

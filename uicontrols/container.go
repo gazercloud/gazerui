@@ -210,7 +210,6 @@ func (c *Container) ClearFocus() {
 }
 
 func (c *Container) FindWidgetUnderPointer(x, y int) uiinterfaces.Widget {
-	//log.Println("FindWidget ", x, y, " on ")
 
 	for i := len(c.PopupWidgets) - 1; i >= 0; i-- {
 		popupWidget := c.PopupWidgets[i]

@@ -661,7 +661,6 @@ func (c *TextBox) ensureVisibleCursor() {
 
 	c.ScrollEnsureVisible(scrollX1+1, cursorPosInPixelsY)
 	c.ScrollEnsureVisible(scrollX2+1, cursorPosInPixelsY+textHeight)*/
-	//log.Println("ensureVisibleCursor !ScrollX:", c.scrollOffsetX, " ScrollY:", c.scrollOffsetY)
 
 	_, oneLineHeight, err := canvas.MeasureText(c.FontFamily(), c.FontSize(), c.FontBold(), c.FontItalic(), "Q", false)
 	charPos, err := canvas.CharPositions(c.FontFamily(), c.fontSize.Float64(), c.FontBold(), c.FontItalic(), c.lines[c.cursorPosY])

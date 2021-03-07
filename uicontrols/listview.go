@@ -8,7 +8,6 @@ import (
 	"github.com/gazercloud/gazerui/uiproperties"
 	"github.com/go-gl/glfw/v3.3/glfw"
 	"image/color"
-	"log"
 	"math"
 )
 
@@ -584,8 +583,6 @@ func (c *ListViewHeader) MouseDown(event *uievents.MouseDownEvent) {
 	c.pressed = true
 	c.Update("ListView")
 
-	log.Println("ListViewHeader MouseDown ", event)
-
 	colRightBorder := c.findColumnRightBorder(event.X, event.Y)
 	if colRightBorder >= 0 {
 		c.columnResizing = true
@@ -594,9 +591,6 @@ func (c *ListViewHeader) MouseDown(event *uievents.MouseDownEvent) {
 }
 
 func (c *ListViewHeader) MouseUp(event *uievents.MouseUpEvent) {
-
-	//log.Println("ListViewHeader MouseUp ", event)
-
 	if c.pressed {
 		c.pressed = false
 		c.columnResizing = false

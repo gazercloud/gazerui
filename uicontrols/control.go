@@ -12,7 +12,6 @@ import (
 	"golang.org/x/image/colornames"
 	"image"
 	"image/color"
-	"log"
 	"math/rand"
 	"runtime"
 	"strings"
@@ -411,8 +410,6 @@ func (c *Control) Update(source string) {
 	} else {
 		if c.OwnWindow != nil {
 			c.OwnWindow.UpdateWindow(source)
-		} else {
-			log.Println("OWN WINDOW IS NULL !!!!!!!!!!!!!!!!", " Source=", source)
 		}
 	}
 }
@@ -1169,7 +1166,6 @@ func (c *Control) ScrollOffsetY() int {
 }
 
 func (c *Control) ScrollEnsureVisible(x1, y1 int) {
-	//log.Println(" ----------- ScrollEnsureVisible x:", x1, " y:",  y1)
 
 	if y1 < c.scrollOffsetY {
 		c.scrollOffsetY = y1
@@ -1185,43 +1181,6 @@ func (c *Control) ScrollEnsureVisible(x1, y1 int) {
 		c.scrollOffsetX = x1 - c.ClientWidth()
 	}
 }
-
-/*func (c *Control) DrawWidgetOnCanvas(canvas *canvas.CanvasDirect) {
-	if c.Disposed() {
-		return
-	}
-
-	if c.parent == nil && c.Window() == nil {
-		panic("No parent & Window")
-	}
-
-	w := c.widget
-	if w == nil {
-		return
-	}
-
-	if c.Width() < 1 || c.Height() < 1 {
-		return
-	}
-
-	if !c.IsVisible() {
-		return
-	}
-
-	canvas.Save()
-	canvas.Translate(c.X(), c.Y())
-	//canvas.Clip(canvas.State().TranslateX, canvas.State().TranslateY, c.Width(), c.Height())
-	canvas.Save()
-	canvas.Translate(-c.scrollOffsetX, -c.scrollOffsetY)
-	canvas.Clip(canvas.State().TranslateX, canvas.State().TranslateY, c.Width(), c.Height())
-	w.Draw(canvas)
-
-	canvas.Load()
-
-	w.DrawBorders(canvas)
-	w.DrawScrollBars(canvas)
-	canvas.Load()
-}*/
 
 func drawCopyOver(dst *image.RGBA, src *image.RGBA, x int, y int) {
 	height := src.Rect.Max.Y

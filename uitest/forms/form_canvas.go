@@ -6,8 +6,6 @@ import (
 	"github.com/gazercloud/gazerui/uiforms"
 	"github.com/gazercloud/gazerui/uiinterfaces"
 	"golang.org/x/image/colornames"
-	"log"
-	"time"
 )
 
 type FormCanvas struct {
@@ -26,11 +24,6 @@ func NewCanvasCtrl(parent uiinterfaces.Widget) *CanvasCtrl {
 
 func (c *CanvasCtrl) Draw(ctx *canvas.CanvasDirect) {
 	ctx.DrawRect(10, 10, 100, 100, colornames.Red, 1)
-	dt1 := time.Now()
-	//ctx.DrawString(0, 10, "S", "Roboto", 112, colornames.Black)
-	dtSpan := time.Since(dt1)
-
-	log.Print("Time 1111111:", dtSpan)
 }
 
 func (c *FormCanvas) OnInit() {

@@ -9,7 +9,6 @@ import (
 
 	"github.com/gazercloud/gazerui/uistyles"
 	"golang.org/x/image/colornames"
-	"log"
 )
 
 type Dialog struct {
@@ -267,12 +266,6 @@ func (c *Dialog) ClosePopup() {
 }
 
 func (c *Dialog) Accept() {
-	log.Println("Dialog::Accept 1 ", c.title)
-
-	if c.title == "Edit sensor" {
-		log.Println("Dialog::Accept 1 ", c.title)
-	}
-
 	if c.closed {
 		return
 	}
@@ -283,16 +276,12 @@ func (c *Dialog) Accept() {
 		}
 	}
 
-	log.Println("Dialog::Accept 2 ", c.title)
-
 	onAccept := c.OnAccept
 	c.Window().CloseTopPopup()
 	c.closed = true
 	if onAccept != nil {
-		log.Println("Dialog::Accept 3 ", c.title)
 		onAccept()
 	}
-	log.Println("Dialog::Accept 4 ", c.title)
 }
 
 func (c *Dialog) Reject() {
