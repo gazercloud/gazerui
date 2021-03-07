@@ -109,7 +109,6 @@ func (c *ComboBox) SetCurrentItemIndex(index int) {
 		ev.Item = c.Items[c.CurrentItemIndex]
 		c.OnCurrentIndexChanged(&ev)
 	}
-
 }
 
 func (c *ComboBox) SetCurrentItemKey(key string) {

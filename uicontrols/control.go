@@ -148,6 +148,9 @@ type Control struct {
 	OnMouseDrop func(droppedValue interface{}, x, y int)
 
 	cursor ui.MouseCursor
+
+	isTabPlate bool
+	tabIndex   int
 }
 
 type Rect struct {
@@ -283,6 +286,10 @@ func (c *Control) UpdateStyle() {
 	c.Update("ControlUpdateStyle")
 }
 
+func (c *Control) Widgets() []uiinterfaces.Widget {
+	return []uiinterfaces.Widget{}
+}
+
 func (c *Control) SetGridPos(x int, y int) {
 	c.SetGridX(x)
 	c.SetGridY(y)
@@ -314,6 +321,22 @@ func (c *Control) SetEnabled(enabled bool) {
 }
 
 func (c *Control) EnabledChanged(enabled bool) {
+}
+
+func (c *Control) IsTabPlate() bool {
+	return c.isTabPlate
+}
+
+func (c *Control) SetIsTabPlate(isTabPlate bool) {
+	c.isTabPlate = isTabPlate
+}
+
+func (c *Control) SetTabIndex(index int) {
+	c.tabIndex = index
+}
+
+func (c *Control) TabIndex() int {
+	return c.tabIndex
 }
 
 func (c *Control) FullPath() string {
@@ -611,7 +634,8 @@ func (c *Control) ClearHover() {
 }
 
 func (c *Control) Focus() {
-	c.OwnWindow.SetFocusForWidget(c)
+	c.OwnWindow.SetFocusForWidget(c.widget)
+	c.Update("Control")
 }
 
 func (c *Control) SetFocus(focus bool) {
@@ -1360,14 +1384,6 @@ func (c *Control) TranslateX(x int) int {
 
 func (c *Control) TranslateY(y int) int {
 	return y - c.Y() + c.ScrollOffsetY() - c.TopBorderWidth()
-}
-
-func (c *Control) TabStop() bool {
-	return true
-}
-
-func (c *Control) TabIndex() int {
-	return 0
 }
 
 func (c *Control) AcceptsReturn() bool {

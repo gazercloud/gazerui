@@ -78,8 +78,13 @@ func (c *TextBlock) MinHeight() int {
 	}
 
 	result := 0
-	for _, line := range c.lines() {
-		_, lineH, _ := canvas.MeasureText(c.FontFamily(), c.FontSize(), c.FontBold(), c.FontItalic(), line, true)
+	if len(c.lines()) > 0 {
+		for _, line := range c.lines() {
+			_, lineH, _ := canvas.MeasureText(c.FontFamily(), c.FontSize(), c.FontBold(), c.FontItalic(), line, true)
+			result += lineH
+		}
+	} else {
+		_, lineH, _ := canvas.MeasureText(c.FontFamily(), c.FontSize(), c.FontBold(), c.FontItalic(), "Qg", true)
 		result += lineH
 	}
 	result += c.TopBorderWidth()

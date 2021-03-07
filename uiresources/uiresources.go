@@ -58,6 +58,11 @@ func ResImgCol(data []byte, col color.Color) image.Image {
 	return img
 }
 
+func ResImg(data []byte) image.Image {
+	img, _ := png.Decode(bytes.NewBuffer(data))
+	return img
+}
+
 var blankImage *image.RGBA
 
 func init() {

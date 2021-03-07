@@ -85,6 +85,14 @@ func (c *dialogHeader) Dispose() {
 	c.Panel.Dispose()
 }
 
+func NewDialog(parent uiinterfaces.Widget, title string, width, height int) *Dialog {
+	var c Dialog
+	c.InitControl(parent, &c)
+	c.SetTitle(title)
+	c.Resize(width, height)
+	return &c
+}
+
 func (c *dialogHeader) setTitle(title string) {
 	c.headerText.SetText(title)
 }
@@ -168,12 +176,15 @@ func (c *Dialog) OnInit() {
 	c.headerPanel.dialog = c
 	c.headerPanel.SetPanelPadding(0)
 	c.headerPanel.SetCellPadding(0)
+	c.headerPanel.SetName("DialogHeaderPanel")
 	c.AddWidgetOnGrid(c.headerPanel, 0, 0)
 	p := c.AddPanelOnGrid(0, 1)
 	p.SetCellPadding(0)
 	p.SetPanelPadding(0)
 	p.AddVSpacerOnGrid(0, 0)
 	c.contentPanel = p.AddPanelOnGrid(1, 0)
+	c.contentPanel.SetIsTabPlate(true)
+	c.contentPanel.SetName("DialogContentPanel")
 
 	c.SetBorders(2, c.ForeColor())
 	c.SetName("Dialog")
@@ -213,7 +224,8 @@ func (c *Dialog) ShowDialogAtPos(x, y int) {
 	c.SetX(x)
 	c.SetY(y)
 	c.Window().AppendPopup(c.widget)
-	c.Focus()
+	c.ContentPanel().widget.Focus()
+	c.Window().ProcessTabDown()
 
 	if c.OnShow != nil {
 		c.OnShow()

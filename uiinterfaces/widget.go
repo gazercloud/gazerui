@@ -116,7 +116,7 @@ type Widget interface {
 	TranslateX(x int) int
 	TranslateY(y int) int
 
-	TabStop() bool
+	IsTabPlate() bool
 	TabIndex() int
 
 	AcceptsReturn() bool
@@ -198,4 +198,5 @@ type Widget interface {
 	ClearLayoutCache()
 
 	UpdateStyle()
+	Widgets() []Widget
 }

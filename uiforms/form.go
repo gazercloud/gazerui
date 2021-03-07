@@ -16,6 +16,7 @@ import (
 	"math/rand"
 	"runtime"
 	"runtime/debug"
+	"sort"
 )
 
 import (
@@ -125,6 +126,7 @@ func (c *Form) Init() {
 	c.userPanel.SetSize(c.Width(), c.Height())
 	c.userPanel.OwnWindow = c
 	c.userPanel.SetName("MainPanelOfForm")
+	c.userPanel.SetIsTabPlate(true)
 	//f.userPanel.SetName("MainPanel")
 	//f.userPanel.SetAnchors(ANCHOR_ALL)
 
@@ -158,6 +160,17 @@ func (c *Form) NewTimer(period int64, handler func()) *uievents.FormTimer {
 	timer.Handler = handler
 	c.formTimers = append(c.formTimers, &timer)
 	return &timer
+}
+
+func (c *Form) MakeTimerAndStart(period int64, handler func(timer *uievents.FormTimer)) *uievents.FormTimer {
+	timer := c.NewTimer(period, nil)
+	timer.Handler = func() {
+		if handler != nil {
+			handler(timer)
+		}
+	}
+	timer.StartTimer()
+	return timer
 }
 
 func (c *Form) RemoveTimer(timer *uievents.FormTimer) {
@@ -968,14 +981,78 @@ func (c *Form) ProcessMouseUp(button uievents.MouseButton) {
 	c.lastMouseDownWidget = nil
 }
 
-func (c *Form) ProcessTabDown() {
-	w := c.userPanel.NextFocusControl()
-	if w == nil {
-		w = c.userPanel.FirstFocusControl()
+func (c *Form) findWidgetsUnderTabPlate(parentWidget uiinterfaces.Widget) []uiinterfaces.Widget {
+	if parentWidget == nil {
+		return []uiinterfaces.Widget{}
 	}
 
-	c.SetFocusForWidget(w)
+	result := make([]uiinterfaces.Widget, 0)
+	for _, w := range parentWidget.Widgets() {
+		if w.IsTabPlate() {
+			continue
+		}
+		result = append(result, w)
+		result = append(result, c.findWidgetsUnderTabPlate(w)...)
+	}
+	return result
+}
 
+func (c *Form) ProcessTabDown() {
+	// find tab plate
+	var tabPlateWidget uiinterfaces.Widget
+	currentWidget := c.focusWidget
+	if currentWidget != nil && currentWidget.IsTabPlate() {
+		tabPlateWidget = currentWidget
+	} else {
+		for currentWidget != nil {
+			if currentWidget.IsTabPlate() {
+				tabPlateWidget = currentWidget
+				break
+			}
+			currentWidget = currentWidget.Parent()
+		}
+	}
+
+	tabPlateWidgets := c.findWidgetsUnderTabPlate(tabPlateWidget)
+	currentTabIndex := -1
+	if c.focusWidget != nil {
+		currentTabIndex = c.focusWidget.TabIndex()
+	}
+
+	widgetsWithTabIndex := make([]uiinterfaces.Widget, 0)
+
+	for _, w := range tabPlateWidgets {
+		if w.TabIndex() > 0 {
+			widgetsWithTabIndex = append(widgetsWithTabIndex, w)
+		}
+	}
+
+	sort.Slice(widgetsWithTabIndex, func(i, j int) bool {
+		return widgetsWithTabIndex[i].TabIndex() < widgetsWithTabIndex[j].TabIndex()
+	})
+
+	nextTabWidget := c.focusWidget
+
+	if c.focusWidget == nil || c.focusWidget.TabIndex() < 1 {
+		if len(widgetsWithTabIndex) != 0 {
+			nextTabWidget = widgetsWithTabIndex[0]
+		}
+	} else {
+		for index, w := range widgetsWithTabIndex {
+			if w.TabIndex() == currentTabIndex {
+				if index == len(widgetsWithTabIndex)-1 {
+					nextTabWidget = widgetsWithTabIndex[0]
+				} else {
+					nextTabWidget = widgetsWithTabIndex[index+1]
+				}
+				break
+			}
+		}
+	}
+
+	if nextTabWidget != nil {
+		nextTabWidget.Focus()
+	}
 }
 
 func (c *Form) FocusedWidget() uiinterfaces.Widget {

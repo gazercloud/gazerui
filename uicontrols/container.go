@@ -534,52 +534,6 @@ func (c *Container) ClearRadioButtons() {
 	}
 }
 
-func (c *Container) NextFocusControl() uiinterfaces.Widget {
-	currentFocusIndex := -1
-	for pos, w := range c.Controls {
-		if w.HasFocus() {
-			currentFocusIndex = pos
-		}
-	}
-
-	if currentFocusIndex >= len(c.Controls)-1 {
-		return nil
-	}
-
-	if currentFocusIndex == -1 && len(c.Controls) > 0 {
-		w := c.Controls[0]
-		if w.NextFocusControl() != nil && w.NextFocusControl().TabStop() {
-			return w.NextFocusControl()
-		}
-		if w.TabStop() {
-			return w
-		} else {
-			return nil
-		}
-
-	}
-
-	w := c.Controls[currentFocusIndex+1]
-	if w.NextFocusControl() != nil && w.NextFocusControl().TabStop() {
-		return w.NextFocusControl()
-	}
-
-	if w.TabStop() {
-		return w
-	}
-
-	return nil
-}
-
-func (c *Container) FirstFocusControl() uiinterfaces.Widget {
-	if len(c.Controls) > 0 {
-		if c.Controls[0].TabStop() {
-			return c.Controls[0]
-		}
-	}
-	return nil
-}
-
 func (c *Container) AppendPopupWidget(w uiinterfaces.Widget) {
 	if w != nil {
 		c.PopupWidgets = append(c.PopupWidgets, w)

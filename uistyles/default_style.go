@@ -77,6 +77,11 @@ Button:hover
 	backgroundColor:#CCCCCCFF;
 }
 
+Button:focus 
+{
+	backgroundColor:#CCCCCCFF;
+}
+
 Button:disabled
 {
 	backgroundColor:#FFFFFFFF;
@@ -329,6 +334,11 @@ Button, TextBox, ListView, TreeView, ProgressBar, ComboBox, TimeChart
 Button:hover 
 {
 	backgroundColor:#004070;
+}
+
+Button:focus 
+{
+	backgroundColor:#202040FF;
 }
 
 TextBlock:disabled

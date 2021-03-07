@@ -300,10 +300,6 @@ func (c *Button) SetTextVAlign(textVAlign canvas.VAlign) {
 	c.Update("Button")
 }
 
-func (c *Button) TabStop() bool {
-	return true
-}
-
 func (c *Button) KeyDown(event *uievents.KeyDownEvent) bool {
 	if event.Key == glfw.KeySpace {
 		if c.onPress != nil {

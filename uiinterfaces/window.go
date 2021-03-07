@@ -88,6 +88,8 @@ type Window interface {
 	CloseAfterPopupWidget(w Widget)
 	CloseTopPopup()
 
+	ProcessTabDown()
+
 	ControlRemoved()
 
 	//SelectColorDialog(col color.Color, onColorChanged func(color color.Color)) (bool, color.Color)
