@@ -712,8 +712,6 @@ func (c *Control) ProcessMouseDown(event *uievents.MouseDownEvent) {
 		c.horizontalScrollMovingMousePos = me.X
 		c.horizontalScrollMovingOriginal = c.scrollOffsetX
 
-		fmt.Println("HSCROLL INIT: ", me.X, c.scrollOffsetX)
-
 		processed = true
 		me.SetUserData("processedWidget", c)
 	}
@@ -978,7 +976,6 @@ func (c *Control) ProcessKeyDown(event *uievents.KeyDownEvent) bool {
 	}
 
 	processed := false
-	fmt.Println("ProcessKeyDown", c.widget.FullPath())
 	if c.onPreKeyDown != nil {
 		c.onPreKeyDown(event)
 		processed = true

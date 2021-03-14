@@ -943,12 +943,9 @@ func (c *Form) ProcessMouseUp(button uievents.MouseButton) {
 		c.ProcessClick(x, y, button)
 	}
 
-	fmt.Println("ProcessMouseUp drop: ", c.draggingObject != nil, c.lastMouseDownWidget != nil)
-
 	if c.draggingObject != nil && c.lastMouseDownWidget != nil {
 
 		widgetUnderPoint := c.userPanel.ProcessFindWidgetUnderPointer(x, y)
-		fmt.Println("ProcessMouseUp widgetUnderPoint: ", widgetUnderPoint.FullPath())
 		fX, fY := widgetUnderPoint.RectClientAreaOnWindow()
 
 		ev := uievents.NewMouseDropEvent(x-fX, y-fY, button, c.keyModifiers, c.draggingObject)
@@ -1097,7 +1094,6 @@ func (f * Form) onClick(x, y int) {
 func (c *Form) Close() {
 	c.window.Hide()
 	c.window.Destroy()
-	fmt.Println("CLOSING WINDOW")
 
 	if _, ok := windowByGLFWWindow[c.window]; ok {
 		delete(windowByGLFWWindow, c.window)
@@ -1116,7 +1112,6 @@ func (c *Form) Close() {
 	} else {
 		fmt.Println("WINDOW NOT FOUND!")
 	}
-	fmt.Println("CLOSED WINDOW: ", len(windows))
 }
 
 func (c *Form) Position() ui.Point {

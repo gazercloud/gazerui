@@ -331,7 +331,6 @@ func (c *TextBox) paste() {
 
 func (c *TextBox) KeyDown(event *uievents.KeyDownEvent) bool {
 	c.redraw()
-	fmt.Println("onKeyDown: ", event.Key)
 
 	if event.Modifiers.Control && event.Key == glfw.KeyA {
 		c.SelectAllText()

@@ -1,7 +1,6 @@
 package uicontrols
 
 import (
-	"fmt"
 	"github.com/gazercloud/gazerui/canvas"
 	"github.com/gazercloud/gazerui/ui"
 	"github.com/gazercloud/gazerui/uievents"
@@ -102,7 +101,6 @@ func (c *PopupMenuItem) MouseClick(event *uievents.MouseClickEvent) {
 	if c.innerMenu != nil {
 		x, y := c.RectClientAreaOnWindow()
 		w := c.Width()
-		fmt.Println("PopupMenuItem Click w", w)
 		c.innerMenu.showMenu(x+w, y, c.parentMenu)
 		return
 	}
@@ -144,8 +142,6 @@ func (c *PopupMenuItem) SetInnerMenu(menu *PopupMenu) {
 func (c *PopupMenuItem) timerShowInnerMenuHandler() {
 	if c.timerShowInnerMenu.Enabled {
 		c.timerShowInnerMenu.Enabled = false
-
-		fmt.Println("PopupMenuItem Timer")
 
 		x, y := c.RectClientAreaOnWindow()
 		w := c.Width()

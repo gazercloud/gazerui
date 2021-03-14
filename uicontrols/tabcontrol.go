@@ -26,6 +26,7 @@ type TabControl struct {
 
 	showAddButton bool
 
+	OnPageSelected     func(index int)
 	OnNeedClose        func(index int)
 	OnAddButtonPressed func()
 }
@@ -166,6 +167,9 @@ func (c *TabControl) SetCurrentPage(index int) {
 		}
 		c.currentPageIndex = index
 		c.Update("TabControl")
+		if c.OnPageSelected != nil {
+			c.OnPageSelected(index)
+		}
 	}
 	c.updateHeaderButtons()
 }

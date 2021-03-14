@@ -86,8 +86,6 @@ func (c *DayOfMonthSelector) fillDays() {
 	xIndex := int(t.Weekday())
 	yIndex := 0
 
-	//fmt.Println(t.Format("2006-01-02 15:04:05.999"))
-
 	lastDay := 0
 	for t.Month() == time.Month(c.month) {
 		dayText := t.Format("02")

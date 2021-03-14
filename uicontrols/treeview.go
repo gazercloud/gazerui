@@ -1,7 +1,6 @@
 package uicontrols
 
 import (
-	"fmt"
 	"github.com/gazercloud/gazerui/canvas"
 	"github.com/gazercloud/gazerui/ui"
 	"github.com/gazercloud/gazerui/uievents"
@@ -239,13 +238,9 @@ func (c *TreeViewHeader) Draw(ctx ui.DrawContext) {
 }
 
 func (c *TreeViewContent) MouseDrop(event *uievents.MouseDropEvent) {
-	fmt.Println("TreeViewContent MouseDrop1 ")
 	node := c.findDisplayNodeByCoordinates(event.X, event.Y)
-	fmt.Println("TreeViewContent MouseDrop 2 ", node)
 	if node != nil {
-		fmt.Println("TreeViewContent MouseDrop 3 ", c.treeView.OnDropOnNode)
 		if c.treeView.OnDropOnNode != nil {
-			fmt.Println("TreeViewContent MouseDrop ok 4")
 			c.treeView.OnDropOnNode(c.treeView, node.node, event.DroppingObject)
 		}
 	}
@@ -622,7 +617,6 @@ func (c *TreeViewContent) MouseUp(event *uievents.MouseUpEvent) {
 
 func (c *TreeViewHeader) MouseMove(event *uievents.MouseMoveEvent) {
 	if c.columnResizing {
-		//fmt.Println("Move: event.Y:", event.X, " c.calcColumnXOffset(c.columnResizingIndex):", c.treeView.calcColumnXOffset(c.columnResizingIndex), " w: ", event.Y-c.treeView.calcColumnXOffset(c.columnResizingIndex))
 		c.treeView.columns[c.columnResizingIndex].width = event.X - c.treeView.calcColumnXOffset(c.columnResizingIndex)
 		if c.treeView.columns[c.columnResizingIndex].width < 10 {
 			c.treeView.columns[c.columnResizingIndex].width = 10
@@ -642,13 +636,10 @@ func (c *TreeViewHeader) MouseMove(event *uievents.MouseMoveEvent) {
 
 func (c *TreeViewContent) MouseMove(event *uievents.MouseMoveEvent) {
 	if c.lastMouseDownNode != nil {
-		fmt.Println("drag 1")
 		if math.Abs(float64(c.lastMouseDownPoint.X-event.X)) > 5 || math.Abs(float64(c.lastMouseDownPoint.Y-event.Y)) > 5 {
-			fmt.Println("drag 2")
 			var dragParameter interface{}
 			dragParameter = c.lastMouseDownNode
 			if c.treeView.OnBeginDrag != nil {
-				fmt.Println("drag 3")
 				dragParameter = c.treeView.OnBeginDrag(c.treeView, c.lastMouseDownNode)
 			}
 			c.BeginDrag(dragParameter)
