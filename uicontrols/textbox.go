@@ -10,6 +10,7 @@ import (
 	"github.com/go-gl/glfw/v3.3/glfw"
 	"golang.org/x/image/colornames"
 	"strings"
+	"unicode/utf8"
 )
 
 type TextBox struct {
@@ -29,6 +30,7 @@ type TextBox struct {
 
 	dragingCursor bool
 	readonly      bool
+	isPassword    bool
 
 	blockUpdate bool
 	emptyText   string
@@ -122,6 +124,10 @@ func (c *TextBox) SetReadOnly(readonly bool) {
 	c.readonly = readonly
 }
 
+func (c *TextBox) SetIsPassword(isPassword bool) {
+	c.isPassword = isPassword
+}
+
 func (c *TextBox) timerCursorBlinking() {
 	if c.focus {
 		c.cursorVisible = !c.cursorVisible
@@ -197,6 +203,17 @@ func (c *TextBox) updateInnerSize() {
 	}
 }
 
+func (c *TextBox) lineToPasswordChars(line string) string {
+	if c.isPassword {
+		lenOfLine := utf8.RuneCountInString(line)
+		line = ""
+		for i := 0; i < lenOfLine; i++ {
+			line += "*"
+		}
+	}
+	return line
+}
+
 func (c *TextBox) Draw(ctx ui.DrawContext) {
 
 	oneLineHeight := c.OneLineHeight()
@@ -247,6 +264,8 @@ func (c *TextBox) Draw(ctx ui.DrawContext) {
 	yOffset := 0
 
 	for _, line := range c.lines {
+		line = c.lineToPasswordChars(line)
+
 		ctx.SetColor(c.foregroundColor.Color())
 		ctx.SetFontSize(c.fontSize.Float64())
 		ctx.SetTextAlign(canvas.HAlignLeft, canvas.VAlignCenter)
@@ -261,7 +280,7 @@ func (c *TextBox) Draw(ctx ui.DrawContext) {
 
 	// Cursor
 	if c.focus && c.cursorVisible {
-		charPos, err := canvas.CharPositions(c.FontFamily(), c.fontSize.Float64(), c.FontBold(), c.FontItalic(), c.lines[c.cursorPosY])
+		charPos, err := canvas.CharPositions(c.FontFamily(), c.fontSize.Float64(), c.FontBold(), c.FontItalic(), c.lineToPasswordChars(c.lines[c.cursorPosY]))
 		for i := 0; i < len(charPos); i++ {
 			charPos[i] = charPos[i] + c.leftAndRightPadding
 		}
