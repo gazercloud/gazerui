@@ -157,9 +157,9 @@ func (c *PopupMenu) rebuildVisualElements() {
 		item.SetHeight(PopupMenuItemHeight)
 		yOffset += PopupMenuItemHeight
 	}
-	c.SetWidth(250)
+	c.SetWidth(300)
 	c.SetHeight(yOffset)
 
-	c.menuWidth = 250
+	c.menuWidth = 300
 	c.menuHeight = yOffset
 }

@@ -282,13 +282,13 @@ Control
 	fontSize: 16;
 	backgroundColor:#202020FF;
 	foregroundColor:#2298EB;
-	inactiveColor:#004455FF;
+	inactiveColor:#444;
 	accentColor:#ff8c00;
 
-	leftBorderColor: #004455FF;
-	rightBorderColor: #004455FF;
-	topBorderColor: #004455FF;
-	bottomBorderColor: #004455FF;
+	leftBorderColor: #444;
+	rightBorderColor: #444;
+	topBorderColor: #444;
+	bottomBorderColor: #444;
 
 	selectionBackground: #00489B;
 
@@ -359,16 +359,17 @@ Button:clicked
 
 ListViewHeader
 {
-	foregroundColor:#004090;
+	foregroundColor:#777;
+	backgroundColor:#242424;
 	leftBorderWidth: 0;
 	rightBorderWidth: 0;
 	topBorderWidth: 0;
 	bottomBorderWidth: 1;
-	bottomBorderColor: #004455FF;
+	bottomBorderColor: #444;
 }
 
 ListView {
-	gridColor: #113344;
+	gridColor: #333;
 }
 
 
