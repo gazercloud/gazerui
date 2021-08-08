@@ -254,14 +254,15 @@ func (c *Form) Draw() bool {
 		return false
 	}
 
-	//fmt.Println("Form Draw")
+	fmt.Println("Form Draw", time.Now().Format("02-01-2006 15-04-05.999"))
 
 	avgDrawTimeMs := int64(0)
 	for i := 0; i < c.drawTimesCount; i++ {
 		avgDrawTimeMs += c.drawTimes[i].Milliseconds()
 	}
 	avgDrawTimeMs = avgDrawTimeMs / int64(c.drawTimesCount)
-	drawPeriodTime := time.Duration(avgDrawTimeMs*2) * time.Millisecond
+	drawPeriodTime := 100 * time.Millisecond
+	//drawPeriodTime := time.Duration(avgDrawTimeMs*2) * time.Millisecond
 	//fmt.Println("Form draw avg:", avgDrawTimeMs, "drawPeriod:", drawPeriodTime)
 
 	if ui.UseOpenGL33 {
