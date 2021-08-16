@@ -254,7 +254,7 @@ func (c *Form) Draw() bool {
 		return false
 	}
 
-	fmt.Println("Form Draw", time.Now().Format("02-01-2006 15-04-05.999"))
+	//fmt.Println("Form Draw", time.Now().Format("02-01-2006 15-04-05.999"))
 
 	avgDrawTimeMs := int64(0)
 	for i := 0; i < c.drawTimesCount; i++ {
