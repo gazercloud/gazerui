@@ -178,6 +178,7 @@ type Widget interface {
 	OnScroll(scrollPositionX int, scrollPositionY int)
 
 	IsVisible() bool
+	IsVisibleRec() bool
 	SetVisible(visible bool)
 
 	SetEnabled(enabled bool)

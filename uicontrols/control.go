@@ -302,6 +302,19 @@ func (c *Control) IsVisible() bool {
 	return c.visible
 }
 
+func (c *Control) IsVisibleRec() bool {
+	if !c.visible {
+		return false
+	}
+
+	if c.parent != nil {
+		if !c.parent.IsVisible() {
+			return false
+		}
+	}
+	return c.visible
+}
+
 func (c *Control) SetVisible(visible bool) {
 	c.visible = visible
 
