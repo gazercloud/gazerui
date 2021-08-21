@@ -1,7 +1,7 @@
 package filedialogs
 
 import (
-	"github.com/gazercloud/gazernode/utilities/paths"
+	"github.com/gazercloud/gazerui/paths"
 	"github.com/gazercloud/gazerui/uicontrols"
 	"github.com/gazercloud/gazerui/uievents"
 	"github.com/gazercloud/gazerui/uiinterfaces"
