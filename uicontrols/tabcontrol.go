@@ -185,7 +185,7 @@ func (c *TabControl) updateHeaderButtons() {
 			c.SetCurrentPage(event.Sender.(*Button).UserData("index").(int))
 		})
 		btn.SetUserData("index", pageIndex)
-		btn.SetMinWidth(100)
+		btn.SetMinWidth(150)
 		c.headerButtons = append(c.headerButtons, btn)
 		page.headerButton = btn
 		btn.SetText(page.text)
